@@ -139,22 +139,22 @@ export default function PixelIA() {
                             className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-accent-cyan/10 border border-accent-cyan/30 text-accent-cyan text-[10px] font-black uppercase tracking-[0.3em]"
                         >
                             <Cpu className="w-4 h-4" />
-                            Sovereign Intelligence Core
+                            GUARDIÃO DO PROTOCOLO NCP
                         </motion.div>
 
                         <h2 className="text-6xl md:text-8xl font-black leading-[0.85] tracking-tighter text-white">
-                            ALÉM DA <br />
-                            <span className="text-gradient underline decoration-accent-cyan/20 decoration-4 underline-offset-8">INTELIGÊNCIA.</span>
+                            O NÚCLEO DA <br />
+                            <span className="text-gradient underline decoration-vibrant-green/20 decoration-4 underline-offset-8">ESTRATÉGIA.</span>
                         </h2>
 
                         <p className="text-slate-400 text-xl leading-relaxed font-light">
-                            O PixelIA não segue padrões; ele os define. Uma arquitetura transcendente que ignora as limitações do mercado para entregar o impossível. Não é apenas IA — é o próximo estágio da evolução digital.
+                            O Pixel não apenas processa dados; ele governa o **Neural Core Protocol**. Uma arquitetura soberana que elimina a incerteza tecnológica para entregar previsibilidade absoluta em operações de alta escala.
                         </p>
 
                         <div className="grid grid-cols-2 gap-6 pt-4">
                             {[
-                                { label: "Cognitive Affinity", val: "∞ SYNC", icon: Zap },
-                                { label: "Neural Response", val: "< 1ms", icon: Activity }
+                                { label: "Eficiência do NCP", val: "100%", icon: Zap },
+                                { label: "Latência de Resposta", val: "< 1ms", icon: Activity }
                             ].map((stat, i) => (
                                 <div key={i} className="bg-white/5 border border-white/10 p-5 rounded-2xl flex items-center gap-4 hover:border-accent-cyan/20 transition-all group cursor-default">
                                     <stat.icon className="w-8 h-8 text-accent-cyan group-hover:scale-110 transition-transform" />
@@ -168,14 +168,14 @@ export default function PixelIA() {
 
                         <div className="pt-6">
                             <motion.a
-                                href={`https://wa.me/5547933805593?text=${encodeURIComponent("Olá! Vim através do site da AgencyHub. Quero experimentar o futuro e saber mais sobre o poder do Sovereign Intelligence Core.")}`}
+                                href={`https://wa.me/5547933805593?text=${encodeURIComponent("Olá! Acabo de descobrir o Neural Core Protocol no site da AgencyHub. Gostaria de entender mais sobre como o Pixel governa a estratégia tecnológica.")}`}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
-                                className="inline-block px-12 py-5 bg-accent-cyan text-slate-950 font-black rounded-2xl text-lg uppercase tracking-[0.15em] hover:shadow-[0_0_60px_rgba(6,182,212,0.6)] transition-all group relative overflow-hidden"
+                                className="inline-block px-12 py-5 bg-vibrant-green text-slate-950 font-black rounded-2xl text-lg uppercase tracking-[0.15em] hover:shadow-[0_0_60px_rgba(190,242,100,0.6)] transition-all group relative overflow-hidden"
                             >
-                                <span className="relative z-10 text-slate-950">EXPERIMENTAR O FUTURO</span>
+                                <span className="relative z-10 text-slate-950">SOLICITAR DIAGNÓSTICO</span>
                                 <div className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
                             </motion.a>
                         </div>

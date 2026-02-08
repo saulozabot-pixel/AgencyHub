@@ -20,7 +20,7 @@ export default function Hero() {
                 >
                     <Sparkles className="w-4 h-4 text-accent-purple" />
                     <span className="text-sm font-medium tracking-wider text-accent-purple">
-                        A NOVA ERA DA TECNOLOGIA
+                        ENGENHARIA DE ALTA DISPONIBILIDADE
                     </span>
                 </motion.div>
 
@@ -30,9 +30,9 @@ export default function Hero() {
                     transition={{ duration: 1, delay: 0.2 }}
                     className="text-6xl md:text-8xl font-black mb-6 tracking-tighter leading-none"
                 >
-                    <span className="text-white">TRANSFORME</span>
+                    <span className="text-white">ARQUITETURAS QUE SUSTENTAM A</span>
                     <br />
-                    <span className="text-gradient">IDEIAS EM IMPACTO</span>
+                    <span className="text-gradient">ESCALA DE LÍDERES</span>
                 </motion.h1>
 
                 <motion.p
@@ -41,8 +41,8 @@ export default function Hero() {
                     transition={{ duration: 1, delay: 0.4 }}
                     className="max-w-2xl mx-auto text-lg md:text-xl text-slate-400 mb-10 leading-relaxed"
                 >
-                    Na <span className="text-white font-bold">AgencyHuab</span>, não construímos apenas softwares.
-                    Criamos experiências fluidas, sistemas resilientes e automações de elite que desafiam o convencional.
+                    Na <span className="text-white font-bold">AgencyHub</span>, não entregamos apenas código.
+                    Projetamos ecossistemas robustos para empresas que já escalam e precisam de previsibilidade, segurança e inteligência adaptativa.
                 </motion.p>
 
                 <motion.div
@@ -55,16 +55,17 @@ export default function Hero() {
                         href={`https://wa.me/5547933805593?text=${encodeURIComponent("Olá! Estou no site da AgencyHub e sinto que é hora de iniciar a evolução do meu projeto. Podemos conversar?")}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="group relative px-8 py-4 bg-white text-slate-950 font-bold rounded-xl overflow-hidden active:scale-95 transition-all text-lg shadow-[0_0_20px_rgba(255,255,255,0.3)]"
+                        className="group relative px-8 py-4 bg-white text-slate-950 font-black rounded-xl overflow-hidden active:scale-95 transition-all text-lg shadow-[0_0_40px_rgba(255,255,255,0.2)] hover:shadow-[0_0_60px_rgba(255,255,255,0.4)]"
                     >
                         <span className="relative z-10 flex items-center gap-2">
-                            INICIAR EVOLUÇÃO
+                            SOLICITAR MAPA DE EVOLUÇÃO
                             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                         </span>
+                        <div className="absolute inset-0 bg-vibrant-green translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-custom" />
                     </a>
 
                     <a href="#services" className="px-8 py-4 glass text-white font-bold rounded-xl border-white/10 hover:bg-white/5 transition-all text-lg tracking-tight">
-                        NOSSAS SOLUÇÕES
+                        O PROTOCOLO NCP
                     </a>
                 </motion.div>
             </div>

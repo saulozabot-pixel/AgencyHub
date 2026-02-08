@@ -18,9 +18,9 @@ export default function Navbar() {
 
                 <div className="hidden md:flex items-center gap-6">
                     {[
-                        { name: "SERVIÇOS", href: "#services" },
-                        { name: "PIXEL IA", href: "#pixel" },
-                        { name: "CONTATO", href: "#cta" }
+                        { name: "PILARES", href: "#services" },
+                        { name: "O PROTOCOLO", href: "#mechanism" },
+                        { name: "PIXEL IA", href: "#pixel" }
                     ].map((item) => (
                         <a
                             key={item.name}
@@ -33,12 +33,12 @@ export default function Navbar() {
                 </div>
 
                 <a
-                    href={`https://wa.me/5547933805593?text=${encodeURIComponent("Olá! Gostaria de contratar a AgencyHub para elevar o nível do meu projeto. Como podemos começar?")}`}
+                    href={`https://wa.me/5547933805593?text=${encodeURIComponent("Olá! Gostaria de solicitar o Protocolo de Acesso ao Mapa de Evolução Tecnológica da AgencyHub.")}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-4 py-2 bg-white text-slate-950 text-[10px] font-black rounded-lg hover:scale-105 transition-transform"
+                    className="px-4 py-2 bg-white text-slate-950 text-[10px] font-black rounded-lg hover:bg-vibrant-green hover:shadow-[0_0_20px_rgba(34,255,160,0.4)] transition-all duration-300 active:scale-95"
                 >
-                    CONTRATAR
+                    PROTOCOLAR ACESSO
                 </a>
             </div>
         </motion.nav>

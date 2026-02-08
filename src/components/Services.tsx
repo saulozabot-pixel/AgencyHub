@@ -6,28 +6,28 @@ import { cn } from "@/lib/utils";
 
 const services = [
     {
-        title: "DESENVOLVIMENTO MOBILE",
-        description: "Aplicativos nativos e híbridos de alta performance que dominam as lojas.",
-        icon: Smartphone,
-        color: "text-accent-cyan",
-        borderColor: "hover:border-accent-cyan/50",
-        shadow: "hover:shadow-[0_0_30px_rgba(6,182,212,0.2)]"
-    },
-    {
-        title: "SISTEMAS SOB MEDIDA",
-        description: "Plataformas web complexas com arquitetura de backend resiliente e escalável.",
+        title: "SISTEMAS DE ALTA DISPONIBILIDADE",
+        description: "Engenharia de backend robusta projetada para suportar picos de tráfego e operações críticas sem latência.",
         icon: Cpu,
         color: "text-accent-purple",
         borderColor: "hover:border-accent-purple/50",
         shadow: "hover:shadow-[0_0_30px_rgba(168,85,247,0.2)]"
     },
     {
-        title: "IA E ESTRATÉGIA",
-        description: "Implementação de Lógica Profunda através do Pixel para revolucionar seus fluxos de valor.",
+        title: "INTELIGÊNCIA ESTRATÉGICA",
+        description: "Automações inteligentes e modelos de IA que não apenas executam, mas otimizam sua margem de lucro.",
         icon: Zap,
         color: "text-vibrant-green",
         borderColor: "hover:border-vibrant-green/50",
         shadow: "hover:shadow-[0_0_30px_rgba(190,242,100,0.2)]"
+    },
+    {
+        title: "INTERFACES DE ALTA PERFORMANCE",
+        description: "Ecossistemas mobile e web com foco absoluto em conversão e experiência de marca premium.",
+        icon: Smartphone,
+        color: "text-accent-cyan",
+        borderColor: "hover:border-accent-cyan/50",
+        shadow: "hover:shadow-[0_0_30px_rgba(6,182,212,0.2)]"
     }
 ];
 
@@ -43,10 +43,10 @@ export default function Services() {
                     className="text-center mb-20"
                 >
                     <h2 className="text-4xl md:text-5xl font-black mb-4 tracking-tight">
-                        NOSSAS <span className="text-gradient">ESPECIALIDADES</span>
+                        PILARES DE <span className="text-gradient">EXPANSÃO</span>
                     </h2>
-                    <p className="text-slate-400 max-w-xl mx-auto">
-                        Combinamos estética moderna com rigor técnico para entregar soluções que não apenas funcionam, mas superam expectativas.
+                    <p className="text-slate-400 max-w-xl mx-auto italic">
+                        Não entregamos ferramentas. Construímos os ativos tecnológicos que sustentam seu próximo nível de escala.
                     </p>
                 </motion.div>
 

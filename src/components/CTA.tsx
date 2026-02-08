@@ -21,28 +21,28 @@ export default function CTA() {
                         viewport={{ once: true }}
                     >
                         <h2 className="text-4xl md:text-6xl font-black mb-8 tracking-tighter leading-none">
-                            PRONTO PARA <span className="text-accent-cyan underline decoration-accent-cyan/30">DECOLAR</span>?<br />
-                            SUA EVOLUÇÃO COMEÇA AGORA.
+                            PRONTO PARA <span className="text-vibrant-green underline decoration-vibrant-green/30">ESCALAR</span>?<br />
+                            O SEU PRÓXIMO NÍVEL É UMA DECISÃO.
                         </h2>
                         <p className="text-slate-300 text-lg md:text-xl max-w-2xl mx-auto mb-12">
-                            Não perca tempo com soluções genéricas. Leve a <span className="text-white font-bold">AgencyHuab</span> para dentro do seu projeto e veja a diferença de uma arquitetura de elite.
+                            Não aceite o teto técnico do amadorismo. Solicite seu <span className="text-white font-bold">Mapa de Evolução Tecnológica</span> e descubra como o Neural Core Protocol pode blindar seu crescimento.
                         </p>
 
                         <div className="flex flex-col md:flex-row items-center justify-center gap-6">
                             <motion.a
-                                href={`https://wa.me/5547933805593?text=${encodeURIComponent("Olá! Pronto para decolar! Quero levar a inteligência de elite da AgencyHub para o meu negócio. Como decolamos?")}`}
+                                href={`https://wa.me/5547933805593?text=${encodeURIComponent("Olá! Estou pronto para o próximo nível. Gostaria de solicitar o Mapa de Evolução Tecnológica para o meu projeto, conforme vi no Neural Core Protocol.")}`}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
-                                className="group relative px-10 py-5 bg-vibrant-green text-slate-950 font-black rounded-2xl flex items-center gap-3 text-xl transition-all shadow-[0_0_40px_rgba(190,242,100,0.4)]"
+                                className="group relative px-10 py-5 bg-white text-slate-950 font-black rounded-2xl flex items-center gap-3 text-xl transition-all shadow-[0_0_40px_rgba(255,255,255,0.3)]"
                             >
-                                FALAR COM O PIXEL
+                                SOLICITAR MEU MAPA
                                 <MessageCircle className="w-6 h-6 group-hover:rotate-12 transition-transform" />
                             </motion.a>
 
                             <button className="px-10 py-5 glass text-white font-bold rounded-2xl border-white/10 hover:bg-white/5 transition-all text-lg flex items-center gap-2">
-                                VER PORTFÓLIO
+                                CONHECER O PROTOCOLO
                                 <Rocket className="w-5 h-5 opacity-50" />
                             </button>
                         </div>

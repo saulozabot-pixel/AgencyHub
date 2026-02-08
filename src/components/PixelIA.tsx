@@ -1,57 +1,36 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence, useMotionValue, useTransform } from "framer-motion";
-import { Terminal, Zap } from "lucide-react";
+import { useEffect, useState } from "react";
+import { motion, useMotionValue, useTransform } from "framer-motion";
+import { Zap, Activity, Cpu } from "lucide-react";
 
-// Componente para o fluxo de código lateral (refinado)
-const CodeStream = () => {
-    const [lines, setLines] = useState<string[]>([]);
-    const codeSnippets = [
-        "synapse.initialize()",
-        "fetch('neural/abstraction')",
-        "process.stream(L_CORE)",
-        "logic_v5.deploy()",
-        "await neural_handshake",
-        "const AI = new Avatar()",
-        "optimizing_synaptic_path",
-        "huab_core.status = 1",
-        "vector.math.inject()",
-        "shading_blueprints..."
-    ];
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setLines(prev => {
-                const newLines = [...prev, codeSnippets[Math.floor(Math.random() * codeSnippets.length)]];
-                return newLines.slice(-10);
-            });
-        }, 1200);
-        return () => clearInterval(interval);
-    }, []);
-
+// Componente para faíscas de energia (focadas apenas na periferia/filamentos)
+const EnergySpark = ({ delay }: { delay: number }) => {
     return (
-        <div className="font-mono text-[9px] text-accent-cyan/50 space-y-0.5 leading-tight">
-            <AnimatePresence mode="popLayout">
-                {lines.map((line, i) => (
-                    <motion.p
-                        key={line + i}
-                        initial={{ opacity: 0, x: -5 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        exit={{ opacity: 0, scale: 0.9 }}
-                        transition={{ duration: 0.4 }}
-                    >
-                        {"> "}{line}
-                    </motion.p>
-                ))}
-            </AnimatePresence>
-        </div>
+        <motion.div
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{
+                opacity: [0, 0.7, 0],
+                scale: [0.3, 0.7, 0.3],
+                // Spawna mais longe do centro para focar nos fios
+                x: [Math.sign(Math.random() - 0.5) * (140 + Math.random() * 60), Math.sign(Math.random() - 0.5) * (220 + Math.random() * 100)],
+                y: [Math.sign(Math.random() - 0.5) * (140 + Math.random() * 60), Math.sign(Math.random() - 0.5) * (220 + Math.random() * 100)],
+            }}
+            transition={{
+                duration: 5 + Math.random() * 4,
+                repeat: Infinity,
+                delay: delay,
+                ease: "easeInOut"
+            }}
+            className="absolute w-1 h-1 bg-accent-cyan rounded-full shadow-[0_0_15px_#06b6d4] z-40 pointer-events-none"
+        />
     );
 };
 
 export default function PixelIA() {
     const mouseX = useMotionValue(0);
     const mouseY = useMotionValue(0);
+    const [sparks, setSparks] = useState<number[]>([]);
 
     useEffect(() => {
         const handleMouseMove = (e: MouseEvent) => {
@@ -59,185 +38,138 @@ export default function PixelIA() {
             mouseY.set(e.clientY);
         };
         window.addEventListener("mousemove", handleMouseMove);
+        setSparks(Array.from({ length: 16 }, (_, i) => i));
         return () => window.removeEventListener("mousemove", handleMouseMove);
     }, [mouseX, mouseY]);
 
-    // Movimentos sutis de paralaxe
-    const faceX = useTransform(mouseX, [0, 2000], [-10, 10]);
-    const faceY = useTransform(mouseY, [0, 1200], [-10, 10]);
-    const glowX = useTransform(mouseX, [0, 2000], [5, -5]);
-    const glowY = useTransform(mouseY, [0, 1200], [5, -5]);
+    // Paralaxe suave
+    const rotateX = useTransform(mouseY, [0, 1200], [6, -6]);
+    const rotateY = useTransform(mouseX, [0, 2000], [-8, 8]);
+    const scale = useTransform(mouseX, [0, 2000], [1, 1.03]);
 
     return (
-        <section className="py-24 relative overflow-hidden bg-background min-h-[700px] flex items-center">
-            {/* Ambient Bokeh Particles (Background) */}
+        <section className="py-24 relative overflow-hidden bg-slate-950 min-h-[1000px] flex items-center">
+
+            {/* FILTRO DE ONDULAÇÃO (Sutil para filamentos) */}
+            <svg style={{ position: 'absolute', width: 0, height: 0 }}>
+                <filter id="filament_flux">
+                    <feTurbulence type="fractalNoise" baseFrequency="0.015" numOctaves="1" result="noise">
+                        <animate attributeName="baseFrequency" values="0.012;0.018;0.012" dur="20s" repeatCount="indefinite" />
+                    </feTurbulence>
+                    <feDisplacementMap in="SourceGraphic" in2="noise" scale="15" />
+                </filter>
+            </svg>
+
+            {/* Atmosfera de Fundo */}
             <div className="absolute inset-0 pointer-events-none">
-                {[...Array(8)].map((_, i) => (
-                    <motion.div
-                        key={i}
-                        animate={{
-                            opacity: [0.1, 0.3, 0.1],
-                            scale: [1, 1.2, 1],
-                            y: [0, -20, 0]
-                        }}
-                        transition={{ duration: 4 + i, repeat: Infinity, delay: i }}
-                        className="absolute rounded-full blur-3xl bg-accent-cyan/10"
-                        style={{
-                            width: `${100 + i * 50}px`,
-                            height: `${100 + i * 50}px`,
-                            left: `${Math.random() * 100}%`,
-                            top: `${Math.random() * 100}%`,
-                        }}
-                    />
-                ))}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1100px] h-[1100px] bg-accent-cyan/10 rounded-full blur-[170px] opacity-20" />
             </div>
 
             <div className="container mx-auto px-6 relative z-10">
-                <div className="flex flex-col lg:flex-row items-center gap-12">
+                <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-32">
 
-                    {/* Visual: High-Fidelity Neural Avatar */}
+                    {/* VISUAL: DUAL-LAYER NEURAL CORE */}
                     <div className="flex-1 relative flex items-center justify-center">
-
                         <motion.div
-                            style={{ x: faceX, y: faceY }}
-                            className="relative w-[450px] h-[450px]"
+                            style={{ rotateX, rotateY, scale, perspective: 2000 }}
+                            className="relative w-[550px] h-[550px] flex items-center justify-center"
                         >
-                            {/* Neural Synapse Dots (Brain Region) */}
-                            <div className="absolute top-[15%] left-[30%] w-[180px] h-[120px] z-20">
-                                {[...Array(25)].map((_, i) => (
-                                    <motion.div
-                                        key={i}
-                                        animate={{
-                                            opacity: [0.2, 1, 0.2],
-                                            scale: [0.8, 1.2, 0.8],
-                                            filter: ["drop-shadow(0 0 2px #06b6d4)", "drop-shadow(0 0 5px #06b6d4)", "drop-shadow(0 0 2px #06b6d4)"]
-                                        }}
-                                        transition={{ duration: 2 + Math.random() * 2, repeat: Infinity, delay: Math.random() * 2 }}
-                                        className="absolute w-1 h-1 bg-accent-cyan rounded-full"
-                                        style={{
-                                            left: `${Math.random() * 100}%`,
-                                            top: `${Math.sin(i * 0.5) * 40 + 50}%`,
-                                        }}
-                                    />
-                                ))}
-                            </div>
+                            {/* Partículas de Fluxo */}
+                            {sparks.map((s) => (
+                                <EnergySpark key={s} delay={s * 0.5} />
+                            ))}
 
-                            {/* Main Humanoid Profile SVG */}
-                            <svg viewBox="0 0 400 400" className="w-full h-full drop-shadow-[0_0_30px_rgba(6,182,212,0.3)]">
-                                <defs>
-                                    <linearGradient id="faceGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                        <stop offset="0%" stopColor="#0f172a" />
-                                        <stop offset="40%" stopColor="#1e293b" />
-                                        <stop offset="100%" stopColor="#0f172a" />
-                                    </linearGradient>
-                                    <filter id="eyeGlow">
-                                        <feGaussianBlur stdDeviation="5" result="blur" />
-                                        <feComposite in="SourceGraphic" in2="blur" operator="over" />
-                                    </filter>
-                                </defs>
-
-                                {/* Head Silhouette Path (Side Profile) */}
-                                <path
-                                    d="M150,50 C230,20 330,80 340,180 C345,280 300,340 250,370 L180,380 C180,380 140,300 130,220 C120,140 100,80 150,50"
-                                    fill="url(#faceGradient)"
-                                    stroke="rgba(6,182,212,0.2)"
-                                    strokeWidth="1"
-                                />
-
-                                {/* Glowing Eye Area */}
-                                <circle cx="280" cy="160" r="15" fill="#06b6d4" filter="url(#eyeGlow)" opacity="0.6">
-                                    <animate attributeName="opacity" values="0.4;0.8;0.4" dur="4s" repeatCount="indefinite" />
-                                </circle>
-                                <circle cx="280" cy="160" r="4" fill="white" opacity="0.8" />
-
-                                {/* Ear HUD Interface (The Circular Interface from image) */}
-                                <g transform="translate(200, 220)">
-                                    <motion.circle
-                                        r="45"
-                                        fill="none"
-                                        stroke="#06b6d4"
-                                        strokeWidth="1"
-                                        strokeDasharray="10 20"
-                                        animate={{ rotate: 360 }}
-                                        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                                        opacity="0.3"
-                                    />
-                                    <motion.circle
-                                        r="35"
-                                        fill="none"
-                                        stroke="#06b6d4"
-                                        strokeWidth="3"
-                                        strokeDasharray="40 100"
-                                        animate={{ rotate: -360 }}
-                                        transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-                                        opacity="0.8"
-                                    />
-                                    <circle r="15" fill="#ef4444" opacity="0.4">
-                                        <animate attributeName="opacity" values="0.2;0.6;0.2" dur="2s" repeatCount="indefinite" />
-                                    </circle>
-                                </g>
-
-                                {/* Connecting Neural Lines (Flowing from back) */}
-                                <path
-                                    d="M100,300 Q150,280 200,220"
-                                    fill="none"
-                                    stroke="#06b6d4"
-                                    strokeWidth="0.5"
-                                    strokeDasharray="5 10"
-                                    opacity="0.3"
-                                />
-                                <path
-                                    d="M80,350 Q130,320 200,220"
-                                    fill="none"
-                                    stroke="#06b6d4"
-                                    strokeWidth="0.5"
-                                    strokeDasharray="2 5"
-                                    opacity="0.2"
-                                />
-                            </svg>
-
-                            {/* Internal Face Code Stream (Overlay) */}
+                            {/* Glow e Anéis Orbitais */}
+                            <div className="absolute inset-x-0 inset-y-0 bg-accent-cyan/5 rounded-full blur-[120px] opacity-25 animate-pulse" />
+                            <div className="absolute inset-0 rounded-full border border-white/5 bg-slate-950/20 backdrop-blur-[2px]" />
                             <motion.div
-                                style={{ x: glowX, y: glowY }}
-                                className="absolute inset-0 z-30 pointer-events-none flex items-center justify-center pl-20"
-                            >
-                                <div className="bg-slate-900/40 backdrop-blur-[2px] p-2 border-l border-accent-cyan/30 rounded-r-lg">
-                                    <CodeStream />
-                                </div>
-                            </motion.div>
-                        </motion.div>
+                                animate={{ rotate: 360, opacity: [0.1, 0.2, 0.1] }}
+                                transition={{ duration: 80, repeat: Infinity, ease: "linear" }}
+                                className="absolute w-[460px] h-[460px] border border-accent-cyan/20 rounded-full border-dashed"
+                            />
 
-                        {/* Floating Status Badge */}
-                        <div className="absolute top-0 right-0 glass px-4 py-2 rounded-full flex items-center gap-2 border-accent-cyan/30">
-                            <div className="w-2 h-2 bg-accent-cyan rounded-full animate-pulse shadow-[0_0_10px_#06b6d4]" />
-                            <span className="text-[10px] font-mono text-accent-cyan uppercase tracking-tighter">Neural Link: Stable</span>
-                        </div>
+                            {/* CAMADA 1: NÚCLEO ESTÁTICO (Centro sólido e nítido) */}
+                            <motion.div
+                                className="absolute z-20 w-[600px] h-[600px] flex items-center justify-center"
+                                style={{
+                                    // Máscara que mostra APENAS o centro
+                                    WebkitMaskImage: 'radial-gradient(circle at center, black 15%, transparent 45%)',
+                                    maskImage: 'radial-gradient(circle at center, black 15%, transparent 45%)',
+                                    opacity: 0.85
+                                }}
+                            >
+                                <img
+                                    src="/neural-brain.png"
+                                    alt="Static Core"
+                                    className="w-full h-full object-contain brightness-110 contrast-125 mix-blend-screen"
+                                />
+                            </motion.div>
+
+                            {/* CAMADA 2: FILAMENTOS DINÂMICOS (Ondulação externa) */}
+                            <motion.div
+                                animate={{ opacity: [0.5, 0.7, 0.5] }}
+                                transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+                                className="absolute z-10 w-[600px] h-[600px] flex items-center justify-center"
+                                style={{
+                                    // Máscara que "limpa" o centro e foca nos fios
+                                    // E suaviza EXTREMAMENTE a transição para o fundo
+                                    WebkitMaskImage: 'radial-gradient(circle at center, transparent 15%, black 40%, transparent 62%)',
+                                    maskImage: 'radial-gradient(circle at center, transparent 15%, black 40%, transparent 62%)',
+                                    filter: 'url(#filament_flux)'
+                                }}
+                            >
+                                <img
+                                    src="/neural-brain.png"
+                                    alt="Animated Filaments"
+                                    className="w-full h-full object-contain brightness-125 contrast-125 mix-blend-screen"
+                                    style={{ transform: 'scale(1.15)' }}
+                                />
+                            </motion.div>
+
+                            {/* Bloom Central para integração de luz */}
+                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] bg-accent-cyan/10 rounded-full blur-[100px] pointer-events-none z-30 mix-blend-plus-lighter" />
+                        </motion.div>
                     </div>
 
-                    {/* Content Section */}
-                    <div className="flex-1 space-y-8 lg:pl-10">
-                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent-cyan/10 border border-accent-cyan/20 text-accent-cyan text-xs font-mono uppercase tracking-widest">
-                            <Zap className="w-3 h-3" />
-                            Huab Intelligence Core
-                        </div>
+                    {/* Content Section: ASPIRATIONAL NARRATIVE */}
+                    <div className="flex-1 space-y-10 lg:max-w-xl text-center lg:text-left">
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-accent-cyan/10 border border-accent-cyan/30 text-accent-cyan text-[10px] font-black uppercase tracking-[0.3em]"
+                        >
+                            <Cpu className="w-4 h-4" />
+                            Sovereign Intelligence Core
+                        </motion.div>
 
-                        <h2 className="text-4xl md:text-6xl font-black leading-tight tracking-tight">
-                            PIXEL IA: <br />
-                            <span className="text-gradient">O CÉREBRO DIGITAL.</span>
+                        <h2 className="text-6xl md:text-8xl font-black leading-[0.85] tracking-tighter text-white">
+                            ALÉM DA <br />
+                            <span className="text-gradient underline decoration-accent-cyan/20 decoration-4 underline-offset-8">INTELIGÊNCIA.</span>
                         </h2>
 
-                        <p className="text-slate-400 text-lg leading-relaxed max-w-xl">
-                            Replicando a complexidade neural para resolver problemas reais.
-                            O Pixel agora processa informações em camadas, simulando a inteligência
-                            humana com a velocidade do silício.
+                        <p className="text-slate-400 text-xl leading-relaxed font-light">
+                            O PixelIA não segue padrões; ele os define. Uma arquitetura transcendente que ignora as limitações do mercado para entregar o impossível. Não é apenas IA — é o próximo estágio da evolução digital.
                         </p>
 
-                        <div className="flex flex-wrap gap-4">
-                            <button className="px-8 py-3 bg-accent-cyan text-slate-950 font-bold rounded-lg hover:shadow-[0_0_30px_rgba(6,182,212,0.4)] transition-all">
-                                Explorar Algoritmos
-                            </button>
-                            <button className="px-8 py-3 bg-white/5 border border-white/10 text-white font-bold rounded-lg hover:bg-white/10 transition-all">
-                                Ver Documentação
+                        <div className="grid grid-cols-2 gap-6 pt-4">
+                            {[
+                                { label: "Cognitive Affinity", val: "∞ SYNC", icon: Zap },
+                                { label: "Neural Response", val: "< 1ms", icon: Activity }
+                            ].map((stat, i) => (
+                                <div key={i} className="bg-white/5 border border-white/10 p-5 rounded-2xl flex items-center gap-4 hover:border-accent-cyan/20 transition-all group cursor-default">
+                                    <stat.icon className="w-8 h-8 text-accent-cyan group-hover:scale-110 transition-transform" />
+                                    <div>
+                                        <p className="text-slate-500 text-[10px] font-mono uppercase tracking-widest">{stat.label}</p>
+                                        <p className="text-white text-2xl font-black tracking-tight">{stat.val}</p>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+
+                        <div className="pt-6">
+                            <button className="px-12 py-5 bg-accent-cyan text-slate-950 font-black rounded-2xl text-lg uppercase tracking-[0.15em] hover:shadow-[0_0_60px_rgba(6,182,212,0.6)] transition-all hover:scale-105 active:scale-95 group relative overflow-hidden">
+                                <span className="relative z-10 text-slate-950">EXPERIMENTAR O FUTURO</span>
+                                <div className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
                             </button>
                         </div>
                     </div>

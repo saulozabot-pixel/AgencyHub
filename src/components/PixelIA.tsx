@@ -2,44 +2,44 @@
 
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, useMotionValue, useTransform } from "framer-motion";
-import { Cpu, Terminal, Activity, Zap } from "lucide-react";
+import { Terminal, Zap } from "lucide-react";
 
-// Componente para o fluxo de código lateral
+// Componente para o fluxo de código lateral (refinado)
 const CodeStream = () => {
     const [lines, setLines] = useState<string[]>([]);
     const codeSnippets = [
-        "Initializing neural_link...",
-        "GET /api/v1/huab-core/logic",
-        "process.env.PIXEL_MODE = 'NEURAL'",
-        "compiling high_level_abstractions",
-        "injecting_logic_v4.2.0",
-        "optimizing_gpu_clusters...",
-        "shading_neural_nodes",
-        "synapse_connection_established",
-        "await agencyHuab.evolution()",
-        "const pixel = new NeuralAvatar()"
+        "synapse.initialize()",
+        "fetch('neural/abstraction')",
+        "process.stream(L_CORE)",
+        "logic_v5.deploy()",
+        "await neural_handshake",
+        "const AI = new Avatar()",
+        "optimizing_synaptic_path",
+        "huab_core.status = 1",
+        "vector.math.inject()",
+        "shading_blueprints..."
     ];
 
     useEffect(() => {
         const interval = setInterval(() => {
             setLines(prev => {
                 const newLines = [...prev, codeSnippets[Math.floor(Math.random() * codeSnippets.length)]];
-                return newLines.slice(-8); // Mantém apenas as últimas 8 linhas
+                return newLines.slice(-10);
             });
-        }, 1500);
+        }, 1200);
         return () => clearInterval(interval);
     }, []);
 
     return (
-        <div className="font-mono text-[10px] text-accent-cyan/60 space-y-1">
+        <div className="font-mono text-[9px] text-accent-cyan/50 space-y-0.5 leading-tight">
             <AnimatePresence mode="popLayout">
                 {lines.map((line, i) => (
                     <motion.p
                         key={line + i}
-                        initial={{ opacity: 0, x: -10 }}
+                        initial={{ opacity: 0, x: -5 }}
                         animate={{ opacity: 1, x: 0 }}
-                        exit={{ opacity: 0, x: 10 }}
-                        transition={{ duration: 0.5 }}
+                        exit={{ opacity: 0, scale: 0.9 }}
+                        transition={{ duration: 0.4 }}
                     >
                         {"> "}{line}
                     </motion.p>
@@ -50,7 +50,6 @@ const CodeStream = () => {
 };
 
 export default function PixelIA() {
-    const [state, setState] = useState<"IDLE" | "THINKING">("IDLE");
     const mouseX = useMotionValue(0);
     const mouseY = useMotionValue(0);
 
@@ -63,184 +62,183 @@ export default function PixelIA() {
         return () => window.removeEventListener("mousemove", handleMouseMove);
     }, [mouseX, mouseY]);
 
-    // Movimentos suaves da face
-    const rotateX = useTransform(mouseY, [0, 1200], [15, -15]);
-    const rotateY = useTransform(mouseX, [0, 2000], [-20, 20]);
+    // Movimentos sutis de paralaxe
+    const faceX = useTransform(mouseX, [0, 2000], [-10, 10]);
+    const faceY = useTransform(mouseY, [0, 1200], [-10, 10]);
+    const glowX = useTransform(mouseX, [0, 2000], [5, -5]);
+    const glowY = useTransform(mouseY, [0, 1200], [5, -5]);
 
     return (
-        <section className="py-24 relative overflow-hidden bg-background">
-            {/* Grid de Fundo Blueprint */}
-            <div className="absolute inset-0 opacity-[0.03] pointer-events-none"
-                style={{
-                    backgroundImage: `linear-gradient(rgba(6, 182, 212, 0.2) 1px, transparent 1px), linear-gradient(90deg, rgba(6, 182, 212, 0.2) 1px, transparent 1px)`,
-                    backgroundSize: '60px 60px'
-                }}
-            />
+        <section className="py-24 relative overflow-hidden bg-background min-h-[700px] flex items-center">
+            {/* Ambient Bokeh Particles (Background) */}
+            <div className="absolute inset-0 pointer-events-none">
+                {[...Array(8)].map((_, i) => (
+                    <motion.div
+                        key={i}
+                        animate={{
+                            opacity: [0.1, 0.3, 0.1],
+                            scale: [1, 1.2, 1],
+                            y: [0, -20, 0]
+                        }}
+                        transition={{ duration: 4 + i, repeat: Infinity, delay: i }}
+                        className="absolute rounded-full blur-3xl bg-accent-cyan/10"
+                        style={{
+                            width: `${100 + i * 50}px`,
+                            height: `${100 + i * 50}px`,
+                            left: `${Math.random() * 100}%`,
+                            top: `${Math.random() * 100}%`,
+                        }}
+                    />
+                ))}
+            </div>
 
             <div className="container mx-auto px-6 relative z-10">
-                <div className="flex flex-col lg:flex-row items-center gap-16">
+                <div className="flex flex-col lg:flex-row items-center gap-12">
 
-                    {/* Visual: Neural Avatar Side */}
-                    <div className="flex-1 relative min-h-[500px] flex items-center justify-center">
+                    {/* Visual: High-Fidelity Neural Avatar */}
+                    <div className="flex-1 relative flex items-center justify-center">
 
-                        {/* Conexões Neurais Externas (Efeito de Movimento) */}
-                        <div className="absolute inset-0 pointer-events-none">
-                            {[...Array(5)].map((_, i) => (
-                                <motion.div
-                                    key={i}
-                                    style={{
-                                        x: useTransform(mouseX, [0, 2000], [-20 * (i + 1), 20 * (i + 1)]),
-                                        y: useTransform(mouseY, [0, 1200], [-10 * (i + 1), 10 * (i + 1)]),
-                                    }}
-                                    className="absolute"
-                                    initial={{ opacity: 0 }}
-                                    animate={{ opacity: [0.1, 0.3, 0.1] }}
-                                    transition={{ duration: 3 + i, repeat: Infinity }}
-                                >
-                                    <svg width="400" height="400" viewBox="0 0 400 400" fill="none">
-                                        <path
-                                            d={`M 200 200 Q ${100 + i * 50} ${50 + i * 30} ${50} ${350}`}
-                                            stroke="url(#neuralGradient)"
-                                            strokeWidth="0.5"
-                                            strokeDasharray="5 5"
-                                        />
-                                        <defs>
-                                            <linearGradient id="neuralGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                                <stop offset="0%" stopColor="#06b6d4" stopOpacity="0" />
-                                                <stop offset="50%" stopColor="#06b6d4" stopOpacity="0.5" />
-                                                <stop offset="100%" stopColor="#06b6d4" stopOpacity="0" />
-                                            </linearGradient>
-                                        </defs>
-                                    </svg>
-                                </motion.div>
-                            ))}
-                        </div>
-
-                        {/* O Avatar Neural */}
                         <motion.div
-                            style={{ rotateX, rotateY }}
-                            onMouseEnter={() => setState("THINKING")}
-                            onMouseLeave={() => setState("IDLE")}
-                            className="relative w-80 h-96 flex items-center justify-center cursor-pointer group"
+                            style={{ x: faceX, y: faceY }}
+                            className="relative w-[450px] h-[450px]"
                         >
-                            {/* Silhueta da Face (SVG Masked/Circuit) */}
-                            <div className="absolute inset-0 bg-slate-950/40 backdrop-blur-sm rounded-full border border-accent-cyan/10 shadow-[0_0_50px_rgba(6,182,212,0.1)] overflow-hidden">
-                                {/* Circuit Pattern Overlay */}
-                                <div className="absolute inset-0 opacity-20"
-                                    style={{
-                                        backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 10 L40 10 L40 40 M60 10 L90 10 L90 40 M10 90 L10 60 L40 60 M90 90 L60 90 L60 60' stroke='%2306b6d4' stroke-width='0.5' fill='none'/%3E%3C/svg%3E")`,
-                                        backgroundSize: '40px 40px'
-                                    }}
-                                />
-
-                                {/* Glow de Fundo Core */}
-                                <motion.div
-                                    animate={{ opacity: [0.1, 0.4, 0.1], scale: [1, 1.1, 1] }}
-                                    transition={{ duration: 4, repeat: Infinity }}
-                                    className="absolute inset-x-10 inset-y-20 bg-accent-cyan/10 blur-3xl rounded-full"
-                                />
-                            </div>
-
-                            {/* Olhos Cibernéticos Brilhantes */}
-                            <div className="z-20 flex gap-12 mb-10">
-                                {[0, 1].map(i => (
-                                    <motion.div
-                                        key={i}
-                                        animate={{
-                                            boxShadow: state === "THINKING" ? "0 0 30px #06b6d4" : "0 0 15px #06b6d4",
-                                            scale: state === "THINKING" ? 1.1 : 1
-                                        }}
-                                        className="w-16 h-16 rounded-full border border-accent-cyan/30 flex items-center justify-center bg-slate-900/80 overflow-hidden relative"
-                                    >
-                                        <motion.div
-                                            style={{
-                                                x: useTransform(mouseX, [0, 2000], [-10, 10]),
-                                                y: useTransform(mouseY, [0, 1200], [-10, 10]),
-                                            }}
-                                            className="w-8 h-8 bg-accent-cyan rounded-full shadow-[0_0_20px_var(--accent-cyan)] flex items-center justify-center"
-                                        >
-                                            <div className="w-2 h-2 bg-white rounded-full opacity-60" />
-                                        </motion.div>
-
-                                        {/* Efeito de Reflexo no Olho */}
-                                        <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-transparent pointer-events-none" />
-                                    </motion.div>
-                                ))}
-                            </div>
-
-                            {/* Painel lateral de Code Stream (Flutuante ao lado do rosto) */}
-                            <motion.div
-                                initial={{ opacity: 0, x: 20 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                className="absolute -right-48 top-1/4 glass p-4 rounded-xl border-accent-cyan/20 w-56 hidden md:block"
-                            >
-                                <div className="flex items-center gap-2 mb-2 text-accent-cyan text-[10px] uppercase tracking-widest font-bold">
-                                    <Terminal className="w-3 h-3" />
-                                    <span>Neural Core Feed</span>
-                                </div>
-                                <CodeStream />
-                                <div className="mt-4 pt-2 border-t border-accent-cyan/10 flex justify-between items-center text-[8px] text-slate-500 font-mono">
-                                    <span>Latency: 0.4ms</span>
-                                    <span>Status: Active</span>
-                                </div>
-                            </motion.div>
-
-                            {/* Cérebro Neural (Partículas internas simuladas) */}
-                            <div className="absolute top-10 left-1/2 -translate-x-1/2 w-48 h-32 opacity-30 pointer-events-none">
-                                {[...Array(12)].map((_, i) => (
+                            {/* Neural Synapse Dots (Brain Region) */}
+                            <div className="absolute top-[15%] left-[30%] w-[180px] h-[120px] z-20">
+                                {[...Array(25)].map((_, i) => (
                                     <motion.div
                                         key={i}
                                         animate={{
                                             opacity: [0.2, 1, 0.2],
-                                            scale: [0.5, 1, 0.5]
+                                            scale: [0.8, 1.2, 0.8],
+                                            filter: ["drop-shadow(0 0 2px #06b6d4)", "drop-shadow(0 0 5px #06b6d4)", "drop-shadow(0 0 2px #06b6d4)"]
                                         }}
-                                        transition={{ duration: 2, repeat: Infinity, delay: i * 0.2 }}
+                                        transition={{ duration: 2 + Math.random() * 2, repeat: Infinity, delay: Math.random() * 2 }}
                                         className="absolute w-1 h-1 bg-accent-cyan rounded-full"
                                         style={{
                                             left: `${Math.random() * 100}%`,
-                                            top: `${Math.random() * 100}%`
+                                            top: `${Math.sin(i * 0.5) * 40 + 50}%`,
                                         }}
                                     />
                                 ))}
                             </div>
+
+                            {/* Main Humanoid Profile SVG */}
+                            <svg viewBox="0 0 400 400" className="w-full h-full drop-shadow-[0_0_30px_rgba(6,182,212,0.3)]">
+                                <defs>
+                                    <linearGradient id="faceGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" stopColor="#0f172a" />
+                                        <stop offset="40%" stopColor="#1e293b" />
+                                        <stop offset="100%" stopColor="#0f172a" />
+                                    </linearGradient>
+                                    <filter id="eyeGlow">
+                                        <feGaussianBlur stdDeviation="5" result="blur" />
+                                        <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                                    </filter>
+                                </defs>
+
+                                {/* Head Silhouette Path (Side Profile) */}
+                                <path
+                                    d="M150,50 C230,20 330,80 340,180 C345,280 300,340 250,370 L180,380 C180,380 140,300 130,220 C120,140 100,80 150,50"
+                                    fill="url(#faceGradient)"
+                                    stroke="rgba(6,182,212,0.2)"
+                                    strokeWidth="1"
+                                />
+
+                                {/* Glowing Eye Area */}
+                                <circle cx="280" cy="160" r="15" fill="#06b6d4" filter="url(#eyeGlow)" opacity="0.6">
+                                    <animate attributeName="opacity" values="0.4;0.8;0.4" dur="4s" repeatCount="indefinite" />
+                                </circle>
+                                <circle cx="280" cy="160" r="4" fill="white" opacity="0.8" />
+
+                                {/* Ear HUD Interface (The Circular Interface from image) */}
+                                <g transform="translate(200, 220)">
+                                    <motion.circle
+                                        r="45"
+                                        fill="none"
+                                        stroke="#06b6d4"
+                                        strokeWidth="1"
+                                        strokeDasharray="10 20"
+                                        animate={{ rotate: 360 }}
+                                        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                                        opacity="0.3"
+                                    />
+                                    <motion.circle
+                                        r="35"
+                                        fill="none"
+                                        stroke="#06b6d4"
+                                        strokeWidth="3"
+                                        strokeDasharray="40 100"
+                                        animate={{ rotate: -360 }}
+                                        transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+                                        opacity="0.8"
+                                    />
+                                    <circle r="15" fill="#ef4444" opacity="0.4">
+                                        <animate attributeName="opacity" values="0.2;0.6;0.2" dur="2s" repeatCount="indefinite" />
+                                    </circle>
+                                </g>
+
+                                {/* Connecting Neural Lines (Flowing from back) */}
+                                <path
+                                    d="M100,300 Q150,280 200,220"
+                                    fill="none"
+                                    stroke="#06b6d4"
+                                    strokeWidth="0.5"
+                                    strokeDasharray="5 10"
+                                    opacity="0.3"
+                                />
+                                <path
+                                    d="M80,350 Q130,320 200,220"
+                                    fill="none"
+                                    stroke="#06b6d4"
+                                    strokeWidth="0.5"
+                                    strokeDasharray="2 5"
+                                    opacity="0.2"
+                                />
+                            </svg>
+
+                            {/* Internal Face Code Stream (Overlay) */}
+                            <motion.div
+                                style={{ x: glowX, y: glowY }}
+                                className="absolute inset-0 z-30 pointer-events-none flex items-center justify-center pl-20"
+                            >
+                                <div className="bg-slate-900/40 backdrop-blur-[2px] p-2 border-l border-accent-cyan/30 rounded-r-lg">
+                                    <CodeStream />
+                                </div>
+                            </motion.div>
                         </motion.div>
 
-                        {/* Base Glow */}
-                        <motion.div
-                            animate={{ opacity: [0.1, 0.3, 0.1] }}
-                            transition={{ duration: 5, repeat: Infinity }}
-                            className="absolute bottom-10 w-64 h-12 bg-accent-cyan/20 blur-2xl rounded-[50%]"
-                        />
+                        {/* Floating Status Badge */}
+                        <div className="absolute top-0 right-0 glass px-4 py-2 rounded-full flex items-center gap-2 border-accent-cyan/30">
+                            <div className="w-2 h-2 bg-accent-cyan rounded-full animate-pulse shadow-[0_0_10px_#06b6d4]" />
+                            <span className="text-[10px] font-mono text-accent-cyan uppercase tracking-tighter">Neural Link: Stable</span>
+                        </div>
                     </div>
 
-                    {/* Content Side: AgencyHub Evolution */}
-                    <div className="flex-1 space-y-8">
+                    {/* Content Section */}
+                    <div className="flex-1 space-y-8 lg:pl-10">
                         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent-cyan/10 border border-accent-cyan/20 text-accent-cyan text-xs font-mono uppercase tracking-widest">
                             <Zap className="w-3 h-3" />
-                            AgencyHub Digital Evolution
+                            Huab Intelligence Core
                         </div>
 
-                        <h2 className="text-4xl md:text-5xl font-bold leading-tight">
+                        <h2 className="text-4xl md:text-6xl font-black leading-tight tracking-tight">
                             PIXEL IA: <br />
-                            <span className="text-gradient">A MENTE POR TRÁS DA LÓGICA.</span>
+                            <span className="text-gradient">O CÉREBRO DIGITAL.</span>
                         </h2>
 
-                        <p className="text-slate-400 text-lg leading-relaxed">
-                            Mais que um assistente, o Pixel é uma entidade de processamento neural projetada para
-                            desvendar arquiteturas complexas e transformar dados brutos em decisões estratégicas de elite.
+                        <p className="text-slate-400 text-lg leading-relaxed max-w-xl">
+                            Replicando a complexidade neural para resolver problemas reais.
+                            O Pixel agora processa informações em camadas, simulando a inteligência
+                            humana com a velocidade do silício.
                         </p>
 
-                        <div className="grid grid-cols-2 gap-6">
-                            <div className="p-4 rounded-xl border border-white/5 bg-slate-900/50 backdrop-blur-sm">
-                                <Activity className="w-5 h-5 text-accent-cyan mb-2" />
-                                <h4 className="text-white font-bold text-sm">Alta Performance</h4>
-                                <p className="text-slate-500 text-xs mt-1">Otimização extrema em tempo real.</p>
-                            </div>
-                            <div className="p-4 rounded-xl border border-white/5 bg-slate-900/50 backdrop-blur-sm">
-                                <Cpu className="w-5 h-5 text-accent-purple mb-2" />
-                                <h4 className="text-white font-bold text-sm">Lógica Neural</h4>
-                                <p className="text-slate-500 text-xs mt-1">Processamento de dados consultivo.</p>
-                            </div>
+                        <div className="flex flex-wrap gap-4">
+                            <button className="px-8 py-3 bg-accent-cyan text-slate-950 font-bold rounded-lg hover:shadow-[0_0_30px_rgba(6,182,212,0.4)] transition-all">
+                                Explorar Algoritmos
+                            </button>
+                            <button className="px-8 py-3 bg-white/5 border border-white/10 text-white font-bold rounded-lg hover:bg-white/10 transition-all">
+                                Ver Documentação
+                            </button>
                         </div>
                     </div>
                 </div>

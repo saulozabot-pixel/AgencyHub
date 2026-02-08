@@ -167,10 +167,17 @@ export default function PixelIA() {
                         </div>
 
                         <div className="pt-6">
-                            <button className="px-12 py-5 bg-accent-cyan text-slate-950 font-black rounded-2xl text-lg uppercase tracking-[0.15em] hover:shadow-[0_0_60px_rgba(6,182,212,0.6)] transition-all hover:scale-105 active:scale-95 group relative overflow-hidden">
+                            <motion.a
+                                href={`https://wa.me/5547933805593?text=${encodeURIComponent("Olá! Vim através do site da AgencyHub. Quero experimentar o futuro e saber mais sobre o poder do Sovereign Intelligence Core.")}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                                className="inline-block px-12 py-5 bg-accent-cyan text-slate-950 font-black rounded-2xl text-lg uppercase tracking-[0.15em] hover:shadow-[0_0_60px_rgba(6,182,212,0.6)] transition-all group relative overflow-hidden"
+                            >
                                 <span className="relative z-10 text-slate-950">EXPERIMENTAR O FUTURO</span>
                                 <div className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
-                            </button>
+                            </motion.a>
                         </div>
                     </div>
                 </div>

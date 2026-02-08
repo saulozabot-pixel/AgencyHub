@@ -33,8 +33,9 @@ export default function Navbar() {
                 </div>
 
                 <a
-                    href="https://wa.me/5547933805593"
+                    href={`https://wa.me/5547933805593?text=${encodeURIComponent("Olá! Gostaria de contratar a AgencyHub para elevar o nível do meu projeto. Como podemos começar?")}`}
                     target="_blank"
+                    rel="noopener noreferrer"
                     className="px-4 py-2 bg-white text-slate-950 text-[10px] font-black rounded-lg hover:scale-105 transition-transform"
                 >
                     CONTRATAR

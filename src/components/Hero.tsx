@@ -51,7 +51,12 @@ export default function Hero() {
                     transition={{ duration: 1, delay: 0.6 }}
                     className="flex flex-col md:flex-row items-center justify-center gap-4"
                 >
-                    <a href="#cta" className="group relative px-8 py-4 bg-white text-slate-950 font-bold rounded-xl overflow-hidden active:scale-95 transition-all text-lg shadow-[0_0_20px_rgba(255,255,255,0.3)]">
+                    <a
+                        href={`https://wa.me/5547933805593?text=${encodeURIComponent("Olá! Estou no site da AgencyHub e sinto que é hora de iniciar a evolução do meu projeto. Podemos conversar?")}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group relative px-8 py-4 bg-white text-slate-950 font-bold rounded-xl overflow-hidden active:scale-95 transition-all text-lg shadow-[0_0_20px_rgba(255,255,255,0.3)]"
+                    >
                         <span className="relative z-10 flex items-center gap-2">
                             INICIAR EVOLUÇÃO
                             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />

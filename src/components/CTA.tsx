@@ -30,7 +30,7 @@ export default function CTA() {
 
                         <div className="flex flex-col md:flex-row items-center justify-center gap-6">
                             <motion.a
-                                href="https://wa.me/5547933805593"
+                                href={`https://wa.me/5547933805593?text=${encodeURIComponent("Olá! Pronto para decolar! Quero levar a inteligência de elite da AgencyHub para o meu negócio. Como decolamos?")}`}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 whileHover={{ scale: 1.05 }}
